@@ -86,8 +86,8 @@ jobs:
       - name: Run SonarCloud Analysis
         run: |
           sonar-scanner \
-            -Dsonar.organization=my-org \
-            -Dsonar.projectKey=my-project \
+            -Dsonar.organization=Fanual Asfaw \
+            -Dsonar.projectKey=fanual-software-dev_SQL-INJECTION-ATTACK-SAMPLE \
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
