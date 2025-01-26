@@ -56,6 +56,7 @@ jobs:
         run: |
           cd backend && npx eslint .
 
+
   dynamic-analysis:
     runs-on: ubuntu-latest
 
@@ -69,4 +70,25 @@ jobs:
         uses: zaproxy/action-full-scan@v0.5.0
         with:
           target: 'http://localhost:5555'
+          
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install SonarScanner
+        run: |
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+          unzip sonar-scanner.zip
+          export PATH=$PATH:$(pwd)/sonar-scanner-4.8.0.2856-linux/bin
+
+      - name: Run SonarCloud Analysis
+        run: |
+          sonar-scanner \
+            -Dsonar.organization=my-org \
+            -Dsonar.projectKey=my-project \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN
 
