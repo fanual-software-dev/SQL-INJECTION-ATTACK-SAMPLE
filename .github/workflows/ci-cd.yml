@@ -63,7 +63,7 @@ jobs:
     steps:
       - name: Start Backend
         run: |
-          cd backend
+          cd /backend
           npm start &
 
       - name: Run OWASP ZAP Scan
