@@ -71,24 +71,24 @@ jobs:
         with:
           target: 'http://localhost:5555'
           
-  sonarcloud:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+#   sonarcloud:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
 
-      - name: Install SonarScanner
-        run: |
-          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-          unzip sonar-scanner.zip
-          export PATH=$PATH:$(pwd)/sonar-scanner-4.8.0.2856-linux/bin
+#       - name: Install SonarScanner
+#         run: |
+#           curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+#           unzip sonar-scanner.zip
+#           export PATH=$PATH:$(pwd)/sonar-scanner-4.8.0.2856-linux/bin
 
-      - name: Run SonarCloud Analysis
-        run: |
-          sonar-scanner \
-            -Dsonar.organization=Fanual Asfaw \
-            -Dsonar.projectKey=fanual-software-dev_SQL-INJECTION-ATTACK-SAMPLE \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
+#       - name: Run SonarCloud Analysis
+#         run: |
+#           sonar-scanner \
+#             -Dsonar.organization=Fanual Asfaw \
+#             -Dsonar.projectKey=fanual-software-dev_SQL-INJECTION-ATTACK-SAMPLE \
+#             -Dsonar.sources=. \
+#             -Dsonar.host.url=https://sonarcloud.io \
+#             -Dsonar.login=$SONAR_TOKEN
 

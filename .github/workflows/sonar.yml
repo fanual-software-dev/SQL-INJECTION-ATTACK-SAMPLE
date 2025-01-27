@@ -1,0 +1,34 @@
+name: SonarCloud Analysis on Windows
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sonarcloud:
+    name: Analyze Code with SonarCloud
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 11 (required for SonarScanner)
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+
+    - name: Download and Install SonarScanner
+      run: |
+        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-windows.zip
+        tar -xf sonar-scanner.zip
+        setx PATH "%CD%\sonar-scanner-4.8.0.2856-windows\bin;%PATH%"
+
+    - name: Run SonarCloud Analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: sonar-scanner
